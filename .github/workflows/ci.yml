@@ -31,4 +31,4 @@ jobs:
       - name: Demonstrate successful label write with suppressed workflow event
         shell: bash
         run: |
-          gh api --method POST "repos/$REPOSITORY/issues/4/labels" -f 'labels[]=TEST-token-suppressed' --jq '.[].name'
+          gh api --method POST "repos/$REPOSITORY/issues/4/labels" -f 'labels[]=TEST-token-only-suppression' --jq '.[].name'
