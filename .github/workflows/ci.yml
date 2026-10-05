@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-      - run: test "$ATTEMPT" != 1 || test "$PR" != 2
+      - run: test "$ATTEMPT" != 1
         env:
           ATTEMPT: ${{ github.run_attempt }}
           PR: ${{ github.event.pull_request.number }}
