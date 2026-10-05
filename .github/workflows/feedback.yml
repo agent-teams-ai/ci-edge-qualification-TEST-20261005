@@ -1,0 +1,15 @@
+name: TEST Feedback
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+concurrency:
+  group: test-feedback-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  feedback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo 'Fast feedback complete'
