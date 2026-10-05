@@ -1,1 +1,2 @@
 Two actual atomic helper callers, final protocol
+Lost creation and attachment acknowledgements
