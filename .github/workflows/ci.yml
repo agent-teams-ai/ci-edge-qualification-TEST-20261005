@@ -44,30 +44,33 @@ jobs:
   windows-check:
     name: ${{ (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:')) && 'windows-check' || 'windows-check-not-requested' }}
     if: always() && (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:'))
-    needs: native
+    needs: [native, flaky]
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-      - run: test "$RESULT" = success
+      - run: test "$RESULT" = success && test "$FLAKY" = success
         env:
           RESULT: ${{ needs.native.result }}
+          FLAKY: ${{ needs.flaky.result }}
   macos-qualification:
     name: ${{ (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:')) && 'macos-qualification' || 'macos-not-requested' }}
     if: always() && (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:'))
-    needs: native
+    needs: [native, flaky]
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-      - run: test "$RESULT" = success
+      - run: test "$RESULT" = success && test "$FLAKY" = success
         env:
           RESULT: ${{ needs.native.result }}
+          FLAKY: ${{ needs.flaky.result }}
   full:
     name: ${{ (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:')) && 'full-ci' || 'ci-not-requested' }}
     if: always() && (github.event_name != 'pull_request' || github.event.label.name == 'ci:full' || startsWith(github.event.label.name, 'ci:full:'))
-    needs: native
+    needs: [native, flaky]
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-      - run: test "$RESULT" = success
+      - run: test "$RESULT" = success && test "$FLAKY" = success
         env:
           RESULT: ${{ needs.native.result }}
+          FLAKY: ${{ needs.flaky.result }}
